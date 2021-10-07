@@ -8,26 +8,28 @@ import pyautogui
 import json
 
 PATH = "../chromedriver 2"
-cui = "38781286"
+# cui = "38781286"
 
 options = Options()
 options.page_load_strategy = "eager"
 driver = Chrome(PATH, options=options)
 
 
-def initialization():
+def initialization(cui_list):
     results = []
-    driver.get("https://www.romanian-companies.eu/search.asp")
-    getting_cui()
-    item = paersin_one()
-    results.append(item)
+    for cui in cui_list:
+        driver.get("https://www.romanian-companies.eu/search.asp")
+        getting_cui()
+        item = paersin_one()
+        results.append(item)
     save_to_file(results)
 
 def getting_cui():
     try:
         WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor"))).click()
-        pyautogui.write(cui)
+        pyautogui.write(cui_list)
         WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, 'input-group-btn'))).click()
+        driver.implicitly_wait(10)
         driver.find_element(By.CLASS_NAME, 'clickable-row').click()
         driver.switch_to_window(driver.window_handles[1])
     except Exception as e:
@@ -62,7 +64,9 @@ def save_to_file(py_dict):
 
 if __name__ == "__main__":
     try:
-        initialization()
+        input_string = input('Enter cui...')
+        input_list = input_string.split(',')
+        initialization(input_list)
     except Exception as e:
         print(e)
     finally:
