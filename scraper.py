@@ -23,7 +23,6 @@ def initialization():
     results.append(item)
     save_to_file(results)
 
-
 def getting_cui():
     try:
         WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor"))).click()
@@ -33,7 +32,6 @@ def getting_cui():
         driver.switch_to_window(driver.window_handles[1])
     except Exception as e:
         print(e)
-
 
 def paersin_one():
     fieldss = []
@@ -62,7 +60,6 @@ def save_to_file(py_dict):
     except Exception as e:
         print(e)
 
-
 if __name__ == "__main__":
     try:
         initialization()
@@ -70,4 +67,3 @@ if __name__ == "__main__":
         print(e)
     finally:
         driver.close()
-        pass
