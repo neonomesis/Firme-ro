@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import pyautogui
-import time
 import json
 
 PATH = "../chromedriver 2"
@@ -20,7 +19,6 @@ def initialization():
     results = []
     driver.get("https://www.romanian-companies.eu/search.asp")
     getting_cui()
-    # time.sleep(5)
     item = paersin_one()
     results.append(item)
     save_to_file(results)
