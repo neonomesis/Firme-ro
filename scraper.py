@@ -3,6 +3,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import pyautogui
 import json
@@ -15,9 +16,9 @@ options.page_load_strategy = "eager"
 driver = Chrome(PATH, options=options)
 
 
-def initialization(cui_list):
+def initialization(input_list):
     results = []
-    for cui in cui_list:
+    for cui in input_list:
         driver.get("https://www.romanian-companies.eu/search.asp")
         getting_cui()
         item = paersin_one()
@@ -26,8 +27,9 @@ def initialization(cui_list):
 
 def getting_cui():
     try:
-        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor"))).click()
-        pyautogui.write(cui_list)
+        ss = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor")))
+        for x in input_list:
+            ss.send_keys(x + Keys.ENTER)
         WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, 'input-group-btn'))).click()
         driver.implicitly_wait(10)
         driver.find_element(By.CLASS_NAME, 'clickable-row').click()
