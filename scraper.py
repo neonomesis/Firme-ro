@@ -14,7 +14,6 @@ options = Options()
 options.page_load_strategy = "eager"
 driver = Chrome(PATH, options=options)
 
-
 def initialization(input_list):
     results = []
     for cui in input_list:
