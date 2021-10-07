@@ -16,7 +16,6 @@ options.page_load_strategy = "eager"
 driver = Chrome(PATH, options=options)
 
 
-
 def initialization():
     results = []
     driver.get("https://www.romanian-companies.eu/search.asp")
@@ -26,7 +25,6 @@ def initialization():
     results.append(item)
     save_to_file(results)
 
-    
 
 def getting_cui():
     try:
@@ -65,7 +63,6 @@ def save_to_file(py_dict):
             f.close()
     except Exception as e:
         print(e)
-
 
 
 if __name__ == "__main__":
