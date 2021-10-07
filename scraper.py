@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+import time
 import pyautogui
 import json
 
@@ -27,13 +28,16 @@ def initialization(input_list):
 
 def getting_cui():
     try:
-        ss = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor")))
         for x in input_list:
+            ss = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.NAME, "searchfor")))
+            # time.sleep(5)
+            driver.implicitly_wait(10)
             ss.send_keys(x + Keys.ENTER)
-        WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, 'input-group-btn'))).click()
-        driver.implicitly_wait(10)
-        driver.find_element(By.CLASS_NAME, 'clickable-row').click()
-        driver.switch_to_window(driver.window_handles[1])
+            driver.implicitly_wait(10)
+            WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, 'input-group-btn'))).click()
+            driver.implicitly_wait(10)
+            driver.find_element(By.CLASS_NAME, 'clickable-row').click()
+            driver.switch_to_window(driver.window_handles[1])
     except Exception as e:
         print(e)
 
