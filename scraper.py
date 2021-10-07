@@ -35,7 +35,6 @@ def getting_cui():
         WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, 'input-group-btn'))).click()
         driver.find_element(By.CLASS_NAME, 'clickable-row').click()
         driver.switch_to_window(driver.window_handles[1])
-        # time.sleep(3)
     except Exception as e:
         print(e)
 
@@ -47,7 +46,7 @@ def paersin_one():
 
     fields = soup.find(id="date-de-identificare").find_all("tr")
 
-    name = fields.soup
+    name = fields[1] 
     fiscal = fields[2]
     other = fields[3]
    
